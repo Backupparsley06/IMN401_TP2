@@ -732,7 +732,7 @@ Transform executeScale(Axe axe, Real delta)
 		axeVector = Vector3<Real>(delta, delta, delta);
 	}
 
-	return Transform::MakeScale(delta, axeVector);
+	return Transform::MakeScale(axeVector);
 }
 
 Transform executeShear(Axe axe, Real delta)

@@ -32,38 +32,42 @@ Geometry* GeometryHelper::CreateGrid(Metre width, Metre depth, uint32 m, uint32 
     // Vous n'utiliserez pas les textures pour ce TP, alors vous n'avez pas à considérer les paramètres float uRepeatRatio et float vRepeatRatio.
     // Un vertex contient sa position, son vecteur normal et ses coordonnées de texture. Pour ce TP, les coordonnées de texture seront (0,0).
     // Vous pouvez vous inspirer du cylindre pour faire la grille.
-	Point3<Metre> p1 = Point3<Metre>(Metre(-width / 2), Metre(), Metre(-depth / 2));
-	Point3<Metre> p2 = Point3<Metre>(Metre(-width / 2), Metre(), Metre(depth / 2));
-	Point3<Metre> p3 = Point3<Metre>(Metre(width / 2), Metre(), Metre(depth / 2));
-	Point3<Metre> p4 = Point3<Metre>(Metre(width / 2), Metre(), Metre(-depth / 2));
+	
+	for (int x = 0; x < m; x++) {
+		for (int z = 0; z < n; z++) {
+			Point3<Metre> p1 = Point3<Metre> (Metre(-width / 2 + x * (width/ m)), Metre(), Metre(-depth / 2 + z * (depth / n)));
+			Point3<Metre> p2 = Point3<Metre>(Metre(-width / 2 + x * (width / m)), Metre(), Metre(-depth / 2 + (z + 1) * (depth / n)));
+			Point3<Metre> p3 = Point3<Metre>(Metre(-width / 2 + (x + 1) * (width / m)), Metre(), Metre(-depth / 2 + (z + 1) * (depth / n)));
+			Point3<Metre> p4 = Point3<Metre>(Metre(-width / 2 + (x + 1) * (width / m)), Metre(), Metre(-depth / 2 + z * (depth / n)));
 
-	// Face 1
-	Vector3<Real> normalF1V1 = (p3 - p1).normalized().crossProduct((p2 - p1).normalized());
-	Vertex f1v1 = Vertex(p1, normalF1V1, Vector2<Real>());
-	Vertex f1v2 = Vertex(p2, normalF1V1, Vector2<Real>());
-	Vertex f1v3 = Vertex(p3, normalF1V1, Vector2<Real>());
+			// Face 1
+			Vector3<Real> normalF1V1 = (p3 - p1).normalized().crossProduct((p2 - p1).normalized());
+			Vertex f1v1 = Vertex(p1, normalF1V1, Vector2<Real>());
+			Vertex f1v2 = Vertex(p2, normalF1V1, Vector2<Real>());
+			Vertex f1v3 = Vertex(p3, normalF1V1, Vector2<Real>());
 
-	vertices.push_back(f1v1);
-	vertices.push_back(f1v2);
-	vertices.push_back(f1v3);
+			vertices.push_back(f1v1);
+			vertices.push_back(f1v2);
+			vertices.push_back(f1v3);
 
-	indices.push_back(0);
-	indices.push_back(2);
-	indices.push_back(1);
+			indices.push_back(x * n * 6 + z * 6);
+			indices.push_back((x * n * 6 + z * 6) + 2);
+			indices.push_back((x * n * 6 + z * 6) + 1);
 
-	Vector3<Real> normalF1V2 = (p4 - p1).normalized().crossProduct((p3 - p1).normalized());
-	Vertex f1v4 = Vertex(p1, normalF1V2, Vector2<Real>());
-	Vertex f1v5 = Vertex(p4, normalF1V2, Vector2<Real>());
-	Vertex f1v6 = Vertex(p3, normalF1V2, Vector2<Real>());
+			Vector3<Real> normalF1V2 = (p4 - p1).normalized().crossProduct((p3 - p1).normalized());
+			Vertex f1v4 = Vertex(p1, normalF1V2, Vector2<Real>());
+			Vertex f1v5 = Vertex(p4, normalF1V2, Vector2<Real>());
+			Vertex f1v6 = Vertex(p3, normalF1V2, Vector2<Real>());
 
-	vertices.push_back(f1v4);
-	vertices.push_back(f1v5);
-	vertices.push_back(f1v6);
+			vertices.push_back(f1v4);
+			vertices.push_back(f1v5);
+			vertices.push_back(f1v6);
 
-	indices.push_back(3);
-	indices.push_back(4);
-	indices.push_back(5);
-
+			indices.push_back((x * n * 6 + z * 6) + 3);
+			indices.push_back((x * n * 6 + z * 6) + 4);
+			indices.push_back((x * n * 6 + z * 6) + 5);
+		}
+	}
     
     Geometry* geom = Geometry::CreateGeometry("Grid", std::move(vertices), std::move(indices));
     return geom;

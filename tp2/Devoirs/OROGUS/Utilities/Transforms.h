@@ -230,20 +230,32 @@ public:
 
 	static Transform MakeShearX(Real shear)
 	{
+		// Fait
 		// TP2 : À compléter
-		return Transform();
+		return Transform(Real(1), Real(shear), Real(shear), Real(),
+			Real(), Real(1), Real(), Real(),
+			Real(), Real(), Real(1), Real(),
+			Real(), Real(), Real(), Real(1));
 	}
 
 	static Transform MakeShearY(Real shear)
 	{
+		// Fait
 		// TP2 : À compléter
-		return Transform();
+		return Transform(Real(1), Real(), Real(), Real(),
+			Real(shear), Real(1), Real(shear), Real(),
+			Real(), Real(), Real(1), Real(),
+			Real(), Real(), Real(), Real(1));
 	}
 
 	static Transform MakeShearZ(Real shear)
 	{
+		// Fait
 		// TP2 : À compléter
-		return Transform();
+		return Transform(Real(1), Real(), Real(), Real(),
+			Real(), Real(1), Real(), Real(),
+			Real(shear), Real(shear), Real(1), Real(),
+			Real(), Real(), Real(), Real(1));
 	}
 
     Transform()
