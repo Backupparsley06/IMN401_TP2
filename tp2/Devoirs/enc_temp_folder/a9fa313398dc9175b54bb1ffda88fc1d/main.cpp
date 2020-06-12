@@ -711,10 +711,9 @@ Transform executeRotation(Axe axe, Degree delta)
 
 Transform executeScale(Axe axe, Real delta)
 {
-	// Fait
 	// TP2 : À compléter
 	Vector3<Real> axeVector;
-	
+	/*
 	if (axe == Axe::X)
 	{
 		axeVector = Vector3<Real>(delta, 1, 1);
@@ -730,6 +729,22 @@ Transform executeScale(Axe axe, Real delta)
 	else if (axe == Axe::All)
 	{
 		axeVector = Vector3<Real>(delta, delta, delta);
+	}*/
+	if (axe == Axe::X)
+	{
+		axeVector = Vector3<Real>(1, 0, 0);
+	}
+	else if (axe == Axe::Y)
+	{
+		axeVector = Vector3<Real>(0, 1, 0);
+	}
+	else if (axe == Axe::Z)
+	{
+		axeVector = Vector3<Real>(0, 0, 1);
+	}
+	else if (axe == Axe::All)
+	{
+		axeVector = Vector3<Real>(1, 1, 1);
 	}
 
 	return Transform::MakeScale(delta, axeVector);
