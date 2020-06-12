@@ -81,6 +81,8 @@ private:
     void setMat4(uint32 uniformLocation, const Matrix4x4<U>& value) const
     {
 		// TP2 : À compléter
+		// Faite
+		glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, value.constValues());
     }
 
     bool validateProgram() const;

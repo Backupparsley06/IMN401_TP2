@@ -32,6 +32,38 @@ Geometry* GeometryHelper::CreateGrid(Metre width, Metre depth, uint32 m, uint32 
     // Vous n'utiliserez pas les textures pour ce TP, alors vous n'avez pas à considérer les paramètres float uRepeatRatio et float vRepeatRatio.
     // Un vertex contient sa position, son vecteur normal et ses coordonnées de texture. Pour ce TP, les coordonnées de texture seront (0,0).
     // Vous pouvez vous inspirer du cylindre pour faire la grille.
+	Point3<Metre> p1 = Point3<Metre>(Metre(-width / 2), Metre(), Metre(-depth / 2));
+	Point3<Metre> p2 = Point3<Metre>(Metre(-width / 2), Metre(), Metre(depth / 2));
+	Point3<Metre> p3 = Point3<Metre>(Metre(width / 2), Metre(), Metre(depth / 2));
+	Point3<Metre> p4 = Point3<Metre>(Metre(width / 2), Metre(), Metre(-depth / 2));
+
+	// Face 1
+	Vector3<Real> normalF1V1 = (p3 - p1).normalized().crossProduct((p2 - p1).normalized());
+	Vertex f1v1 = Vertex(p1, normalF1V1, Vector2<Real>());
+	Vertex f1v2 = Vertex(p2, normalF1V1, Vector2<Real>());
+	Vertex f1v3 = Vertex(p3, normalF1V1, Vector2<Real>());
+
+	vertices.push_back(f1v1);
+	vertices.push_back(f1v2);
+	vertices.push_back(f1v3);
+
+	indices.push_back(0);
+	indices.push_back(2);
+	indices.push_back(1);
+
+	Vector3<Real> normalF1V2 = (p4 - p1).normalized().crossProduct((p3 - p1).normalized());
+	Vertex f1v4 = Vertex(p1, normalF1V2, Vector2<Real>());
+	Vertex f1v5 = Vertex(p4, normalF1V2, Vector2<Real>());
+	Vertex f1v6 = Vertex(p3, normalF1V2, Vector2<Real>());
+
+	vertices.push_back(f1v4);
+	vertices.push_back(f1v5);
+	vertices.push_back(f1v6);
+
+	indices.push_back(3);
+	indices.push_back(4);
+	indices.push_back(5);
+
     
     Geometry* geom = Geometry::CreateGeometry("Grid", std::move(vertices), std::move(indices));
     return geom;
@@ -54,8 +86,184 @@ Geometry* GeometryHelper::CreateBox(Metre width, Metre height, Metre depth, Real
 	std::vector<Vertex> vertices;
 	std::vector<uint32> indices;
 
+	// Faite
 	// TP2 : à compléter
 	// Vous pouvez vous inspirer du tétrahèdre pour faire le cube. Le tétrahèdre remplace temporairement la sphère que vous aurez à faire au tp3.
+
+	// Cube
+	Point3<Metre> p1 = Point3<Metre>(Metre(-width/2), Metre(-height/2), Metre(-depth/2));
+	Point3<Metre> p2 = Point3<Metre>(Metre(-width / 2), Metre(height/2), Metre(-depth / 2));
+	Point3<Metre> p3 = Point3<Metre>(Metre(width/2), Metre(height/2), Metre(-depth / 2));
+	Point3<Metre> p4 = Point3<Metre>(Metre(width/2), Metre(-height / 2), Metre(-depth / 2));
+	Point3<Metre> p5 = Point3<Metre>(Metre(-width / 2), Metre(-height / 2), Metre(depth/2));
+	Point3<Metre> p6 = Point3<Metre>(Metre(-width / 2), Metre(height/2), Metre(depth/2));
+	Point3<Metre> p7 = Point3<Metre>(Metre(width/2), Metre(height/2), Metre(depth/2));
+	Point3<Metre> p8 = Point3<Metre>(Metre(width/2), Metre(-height / 2), Metre(depth/2));
+
+	// Face 1
+	Vector3<Real> normalF1V1 = (p3 - p1).normalized().crossProduct((p2 - p1).normalized());
+	Vertex f1v1 = Vertex(p1, normalF1V1, Vector2<Real>());
+	Vertex f1v2 = Vertex(p2, normalF1V1, Vector2<Real>());
+	Vertex f1v3 = Vertex(p3, normalF1V1, Vector2<Real>());
+
+	vertices.push_back(f1v1);
+	vertices.push_back(f1v2);
+	vertices.push_back(f1v3);
+
+	indices.push_back(0);
+	indices.push_back(2);
+	indices.push_back(1);
+
+	Vector3<Real> normalF1V2 = (p4 - p1).normalized().crossProduct((p3 - p1).normalized());
+	Vertex f1v4 = Vertex(p1, normalF1V2, Vector2<Real>());
+	Vertex f1v5 = Vertex(p4, normalF1V2, Vector2<Real>());
+	Vertex f1v6 = Vertex(p3, normalF1V2, Vector2<Real>());
+
+	vertices.push_back(f1v4);
+	vertices.push_back(f1v5);
+	vertices.push_back(f1v6);
+
+	indices.push_back(3);
+	indices.push_back(4);
+	indices.push_back(5);
+
+	// Face 2
+	Vector3<Real> normalF2V1 = (p4 - p1).normalized().crossProduct((p5 - p1).normalized());
+	Vertex f2v1 = Vertex(p5, normalF2V1, Vector2<Real>());
+	Vertex f2v2 = Vertex(p1, normalF2V1, Vector2<Real>());
+	Vertex f2v3 = Vertex(p4, normalF2V1, Vector2<Real>());
+
+	vertices.push_back(f2v1);
+	vertices.push_back(f2v2);
+	vertices.push_back(f2v3);
+
+	indices.push_back(6);
+	indices.push_back(7);
+	indices.push_back(8);
+
+	Vector3<Real> normalF2V2 = (p8 - p5).normalized().crossProduct((p4 - p5).normalized());
+	Vertex f2v4 = Vertex(p5, normalF2V2, Vector2<Real>());
+	Vertex f2v5 = Vertex(p8, normalF2V2, Vector2<Real>());
+	Vertex f2v6 = Vertex(p4, normalF2V2, Vector2<Real>());
+
+	vertices.push_back(f2v4);
+	vertices.push_back(f2v5);
+	vertices.push_back(f2v6);
+
+	indices.push_back(9);
+	indices.push_back(10);
+	indices.push_back(11);
+
+	// Face 3
+	Vector3<Real> normalF3V1 = (p6 - p5).normalized().crossProduct((p7 - p5).normalized());
+	Vertex f3v1 = Vertex(p5, normalF3V1, Vector2<Real>());
+	Vertex f3v2 = Vertex(p6, normalF3V1, Vector2<Real>());
+	Vertex f3v3 = Vertex(p7, normalF3V1, Vector2<Real>());
+
+	vertices.push_back(f3v1);
+	vertices.push_back(f3v2);
+	vertices.push_back(f3v3);
+
+	indices.push_back(12);
+	indices.push_back(13);
+	indices.push_back(14);
+	
+	Vector3<Real> normalF3V2 = (p8 - p5).normalized().crossProduct((p7 - p5).normalized());
+	Vertex f3v4 = Vertex(p5, normalF3V2, Vector2<Real>());
+	Vertex f3v5 = Vertex(p8, normalF3V2, Vector2<Real>());
+	Vertex f3v6 = Vertex(p7, normalF3V2, Vector2<Real>());
+
+	vertices.push_back(f3v4);
+	vertices.push_back(f3v5);
+	vertices.push_back(f3v6);
+
+	indices.push_back(15);
+	indices.push_back(16);
+	indices.push_back(17);
+
+	// Face 4
+	Vector3<Real> normalF4V1 = (p7 - p6).normalized().crossProduct((p2 - p6).normalized());
+	Vertex f4v1 = Vertex(p2, normalF4V1, Vector2<Real>());
+	Vertex f4v2 = Vertex(p6, normalF4V1, Vector2<Real>());
+	Vertex f4v3 = Vertex(p7, normalF4V1, Vector2<Real>());
+
+	vertices.push_back(f4v1);
+	vertices.push_back(f4v2);
+	vertices.push_back(f4v3);
+
+	indices.push_back(18);
+	indices.push_back(19);
+	indices.push_back(20);
+	
+	Vector3<Real> normalF4V2 = (p3 - p2).normalized().crossProduct((p7 - p2).normalized());
+	Vertex f4v4 = Vertex(p2, normalF4V2, Vector2<Real>());
+	Vertex f4v5 = Vertex(p3, normalF4V2, Vector2<Real>());
+	Vertex f4v6 = Vertex(p7, normalF4V2, Vector2<Real>());
+
+	vertices.push_back(f4v4);
+	vertices.push_back(f4v5);
+	vertices.push_back(f4v6);
+
+	indices.push_back(21);
+	indices.push_back(22);
+	indices.push_back(23);
+
+	// Face 5
+	Vector3<Real> normalF5V1 = (p7 - p3).normalized().crossProduct((p4 - p3).normalized());
+	Vertex f5v1 = Vertex(p4, normalF5V1, Vector2<Real>());
+	Vertex f5v2 = Vertex(p3, normalF5V1, Vector2<Real>());
+	Vertex f5v3 = Vertex(p7, normalF5V1, Vector2<Real>());
+
+	vertices.push_back(f5v1);
+	vertices.push_back(f5v2);
+	vertices.push_back(f5v3);
+
+	indices.push_back(24);
+	indices.push_back(25);
+	indices.push_back(26);
+
+	
+	Vector3<Real> normalF5V2 = (p8 - p4).normalized().crossProduct((p7 - p4).normalized());
+	Vertex f5v4 = Vertex(p4, normalF5V2, Vector2<Real>());
+	Vertex f5v5 = Vertex(p8, normalF5V2, Vector2<Real>());
+	Vertex f5v6 = Vertex(p7, normalF5V2, Vector2<Real>());
+
+	vertices.push_back(f5v4);
+	vertices.push_back(f5v5);
+	vertices.push_back(f5v6);
+
+	indices.push_back(27);
+	indices.push_back(28);
+	indices.push_back(29);
+
+	// Face 6
+	Vector3<Real> normalF6V1 = (p2 - p6).normalized().crossProduct((p5 - p6).normalized());
+	Vertex f6v1 = Vertex(p5, normalF6V1, Vector2<Real>());
+	Vertex f6v2 = Vertex(p6, normalF6V1, Vector2<Real>());
+	Vertex f6v3 = Vertex(p2, normalF6V1, Vector2<Real>());
+
+	vertices.push_back(f6v1);
+	vertices.push_back(f6v2);
+	vertices.push_back(f6v3);
+
+	indices.push_back(30);
+	indices.push_back(31);
+	indices.push_back(32);
+
+	
+	Vector3<Real> normalF6V2 = (p1 - p5).normalized().crossProduct((p2 - p5).normalized());
+	Vertex f6v4 = Vertex(p5, normalF6V2, Vector2<Real>());
+	Vertex f6v5 = Vertex(p1, normalF6V2, Vector2<Real>());
+	Vertex f6v6 = Vertex(p2, normalF6V2, Vector2<Real>());
+
+	vertices.push_back(f6v4);
+	vertices.push_back(f6v5);
+	vertices.push_back(f6v6);
+
+	indices.push_back(33);
+	indices.push_back(34);
+	indices.push_back(35);
+
 
     Geometry* geom = Geometry::CreateGeometry("Cube", std::move(vertices), std::move(indices));
     return geom;
