@@ -28,6 +28,7 @@ Geometry* GeometryHelper::CreateGrid(Metre width, Metre depth, uint32 m, uint32 
 	std::vector<Vertex> vertices;
 	std::vector<uint32> indices;
 
+	// Faite 
 	// TP2 : À compléter
     // Vous n'utiliserez pas les textures pour ce TP, alors vous n'avez pas à considérer les paramètres float uRepeatRatio et float vRepeatRatio.
     // Un vertex contient sa position, son vecteur normal et ses coordonnées de texture. Pour ce TP, les coordonnées de texture seront (0,0).

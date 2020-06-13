@@ -208,8 +208,8 @@
     <Natvis Include="IMN401.natvis" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scenes\Shaders\BaseColorLitFragmentShader.fs" />
     <None Include="Scenes\Scene.scn" />
     <None Include="Scenes\Shaders\BaseVertexShader.vs" />
+    <None Include="Scenes\Shaders\BaseColorLitFragmentShader.fs" />
   </ItemGroup>
 </Project>
